@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { courses } from "@/db/schema";
 import { InfinityIcon } from "lucide-react";
 
 import { Button } from "./ui/button";
@@ -7,8 +8,8 @@ import { Button } from "./ui/button";
 type Props = {
   points: number;
   hearts: number;
-  activeCourse: { imageSrc: string; title: string }; // Replace with DB types later
   hasActiveSubscription: boolean;
+  activeCourse: typeof courses.$inferSelect;
 };
 
 export const UserProgress = ({

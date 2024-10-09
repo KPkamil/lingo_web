@@ -1,16 +1,20 @@
 import { redirect } from "next/navigation";
 
-import { getUserProgress } from "@/db/queries";
 import { FeedWrapper } from "@/components/feed-wrapper";
+import { getUnits, getUserProgress } from "@/db/queries";
 import { UserProgress } from "@/components/user-progress";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 
 import { Header } from "./header";
 
 const page = async () => {
+  const unitsDataPromise = getUnits();
   const userProgressPromise = getUserProgress();
 
-  const [userProgress] = await Promise.all([userProgressPromise]);
+  const [units, userProgress] = await Promise.all([
+    unitsDataPromise,
+    userProgressPromise,
+  ]);
 
   if (!userProgress || !userProgress.activeCourse) {
     redirect("/courses");

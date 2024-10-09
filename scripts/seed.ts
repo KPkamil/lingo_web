@@ -15,10 +15,17 @@ const main = async () => {
 
     await db.delete(schema.courses);
     await db.delete(schema.userProgress);
+    await db.delete(schema.units);
+    await db.delete(schema.lessons);
+    await db.delete(schema.challenges);
+    await db.delete(schema.challengeOptions);
+    await db.delete(schema.challengeProgress);
+
+    const spanishUUID = randomUUID();
 
     await db.insert(schema.courses).values([
       {
-        id: randomUUID(),
+        id: spanishUUID,
         title: "Spanish",
         imageSrc: "./es.svg",
       },
@@ -36,6 +43,65 @@ const main = async () => {
         id: randomUUID(),
         title: "Croatian",
         imageSrc: "./hr.svg",
+      },
+    ]);
+
+    const unitUUID = randomUUID();
+    await db.insert(schema.units).values([
+      {
+        id: unitUUID,
+        courseId: spanishUUID,
+        order: 1,
+        title: "Unit 1",
+        description: "Learn the basics of Spanish",
+      },
+    ]);
+
+    const lessonUUID = randomUUID();
+    await db.insert(schema.lessons).values([
+      {
+        id: lessonUUID,
+        unitId: unitUUID,
+        order: 1,
+        title: "Nouns",
+      },
+    ]);
+
+    const challengeUUID = randomUUID();
+    await db.insert(schema.challenges).values([
+      {
+        id: challengeUUID,
+        lessonId: lessonUUID,
+        order: 1,
+        type: "SELECT",
+        question: 'Which one of these is the "the man"?',
+      },
+    ]);
+
+    await db.insert(schema.challengeOptions).values([
+      {
+        id: randomUUID(),
+        challengeId: challengeUUID,
+        correct: true,
+        text: "el hombre",
+        imageSrc: "/man.svg",
+        audioSrc: "/es_man.mp3",
+      },
+      {
+        id: randomUUID(),
+        challengeId: challengeUUID,
+        correct: false,
+        text: "la mujer",
+        imageSrc: "/woman.svg",
+        audioSrc: "/es_woman.mp3",
+      },
+      {
+        id: randomUUID(),
+        challengeId: challengeUUID,
+        correct: false,
+        text: "el robot",
+        imageSrc: "/robot.svg",
+        audioSrc: "/es_robot.mp3",
       },
     ]);
 

@@ -5,6 +5,7 @@ import { getUnits, getUserProgress } from "@/db/queries";
 import { UserProgress } from "@/components/user-progress";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 
+import { Unit } from "./unit";
 import { Header } from "./header";
 
 const page = async () => {
@@ -32,6 +33,19 @@ const page = async () => {
       </StickyWrapper>
       <FeedWrapper>
         <Header title={userProgress.activeCourse.title} />
+        {units.map((unit) => (
+          <div key={unit.id} className="mb-10">
+            <Unit
+              id={unit.id}
+              order={unit.order}
+              title={unit.title}
+              lessons={unit.lessons}
+              activeLesson={undefined}
+              activeLessonPercentage={0}
+              description={unit.description}
+            />
+          </div>
+        ))}
       </FeedWrapper>
     </div>
   );

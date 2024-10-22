@@ -65,6 +65,30 @@ const main = async () => {
         order: 1,
         title: "Nouns",
       },
+      {
+        id: randomUUID(),
+        unitId: unitUUID,
+        order: 2,
+        title: "Verbs",
+      },
+      {
+        id: randomUUID(),
+        unitId: unitUUID,
+        order: 3,
+        title: "Verbs",
+      },
+      {
+        id: randomUUID(),
+        unitId: unitUUID,
+        order: 4,
+        title: "Verbs",
+      },
+      {
+        id: randomUUID(),
+        unitId: unitUUID,
+        order: 5,
+        title: "Verbs",
+      },
     ]);
 
     const challengeUUID = randomUUID();

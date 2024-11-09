@@ -7,6 +7,7 @@ import { Check, Crown, Star } from "lucide-react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 import { cn } from "@/lib/utils";
+import { COLORS } from "@/constants/colors";
 import { Button } from "@/components/ui/button";
 
 type Props = {
@@ -72,10 +73,10 @@ export const LessonButton = ({
               value={Number.isNaN(percentage) ? 0 : percentage}
               styles={{
                 path: {
-                  stroke: "#4ade80",
+                  stroke: COLORS.lime,
                 },
                 trail: {
-                  stroke: "e5e7eb",
+                  stroke: COLORS.lightGray,
                 },
               }}
             >

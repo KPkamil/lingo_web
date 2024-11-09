@@ -1,6 +1,8 @@
 import { relations } from "drizzle-orm";
 import { boolean, integer, pgEnum, pgTable, text } from "drizzle-orm/pg-core";
 
+import { DEFAULT_HEARTS } from "@/constants/user";
+
 export const courses = pgTable("courses", {
   id: text("id").primaryKey(),
   title: text("title").notNull(),
@@ -110,9 +112,9 @@ export const challengeProgressRelations = relations(
 
 export const userProgress = pgTable("user_progress", {
   userId: text("user_id").primaryKey(),
-  hearts: integer("hearts").notNull().default(5),
   points: integer("points").notNull().default(0),
   userName: text("user_name").notNull().default("User"),
+  hearts: integer("hearts").notNull().default(DEFAULT_HEARTS),
   userImageSrc: text("user_image_src").notNull().default("/mascot.svg"),
   activeCourseId: text("active_course_id").references(() => courses.id, {
     onDelete: "cascade",

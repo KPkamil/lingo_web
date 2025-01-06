@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 
 import { useQuiz } from "@/hooks/lesson/useQuiz";
 import { POINTS_PER_CHALLENGE } from "@/constants/user";
-import { challengeOptions, challenges as schemaChallenges } from "@/db/schema";
+import {
+  challengeOptions,
+  challenges as schemaChallenges,
+  userSubscription,
+} from "@/db/schema";
 
 import { Footer } from "./footer";
 import { Header } from "./header";
@@ -17,13 +21,17 @@ import { QuestionBubble } from "./question-bubble";
 
 type Props = {
   initialHearts: number;
-  userSubscription: any; // TODO: Define userSubscription type
   initialLessonId: string;
   initialPercentage: number;
   initialLessonChallenges: (typeof schemaChallenges.$inferSelect & {
     completed: boolean;
     challengeOptions: (typeof challengeOptions.$inferSelect)[];
   })[];
+  userSubscription:
+    | (typeof userSubscription.$inferSelect & {
+        isActive: boolean;
+      })
+    | null;
 };
 
 export const Quiz = ({

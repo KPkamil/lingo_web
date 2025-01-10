@@ -1,16 +1,18 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
+import { Promo } from "@/components/promo";
+import { Quests } from "@/components/quests";
 import { Separator } from "@/components/ui/separator";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { UserProgress } from "@/components/user-progress";
 import { StickyWrapper } from "@/components/sticky-wrapper";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   getTopTenUsers,
   getUserProgress,
   getUserSubscription,
 } from "@/db/queries";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const LeaderboardPage = async () => {
   const leaderboardPromise = getTopTenUsers();
@@ -38,6 +40,8 @@ const LeaderboardPage = async () => {
           hasActiveSubscription={isPro}
           activeCourse={userProgress.activeCourse}
         />
+        {!isPro && <Promo />}
+        <Quests points={userProgress.points} />
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">
